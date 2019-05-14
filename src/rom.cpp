@@ -226,10 +226,26 @@ void unloadROM(void) {
 }
 
 #ifdef VexV5
+  #include "robot.h"
+  #include <iostream>
   bool v5loadROM(char *filename) {
+    if (!Brain.SDcard.isInserted()) {std::cout<<"SD Card not inserted"<<std::endl; return 0;}
     FILE *f;
-    f = fopen(filename, "r");
-    size_t length = ftell(f);
+    f = fopen(filename, "rb");
+
+    size_t length;
+
+    if(!f) {std::cout<<"ROM not found"<<std::endl; return 0;}
+	
+    fseek(f, 0, SEEK_END);
+    length = ftell(f);
+    if(length < 0x180) {
+      printf("ROM is too small!\n");
+      fclose(f);
+      return 0;
+    }
+	
+	  rewind(f);
 
     fread(cart, length, 1, f);
 

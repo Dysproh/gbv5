@@ -25,10 +25,15 @@ void quit() {
 
 int main () {
   Brain.Screen.render();
+
+  #ifndef NOFS
   if (!v5loadROM("tetris.gb")) {
     std::cout<<"v5loadROM failed"<<std::endl;
     quit();
   }
+  #else
+  std::cout<<"NOFS Not Implemented in VexV5 yet"<<std::endl;
+  #endif
 
 
   while(true) {

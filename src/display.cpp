@@ -83,7 +83,7 @@ void renderScanline(void) {
 	int y = (gpu.scanline + gpu.scrollY) & 7;
 	
 	int pixelOffset;
-	#if defined WIN || defined LIN || defined PS4 || defined __APPLE__
+	#if defined WIN || defined LIN || defined PS4 || defined __APPLE__ || defined VexV5
 		pixelOffset = gpu.scanline * 160;
 	#endif
 	
@@ -111,7 +111,7 @@ void renderScanline(void) {
 		
 		scanlineRow[i] = colour;
 		
-		#if defined WIN || defined LIN || defined __APPLE__
+		#if defined WIN || defined LIN || defined __APPLE__ || defined VexV5
 			framebuffer[pixelOffset].r = backgroundPalette[colour].r;
 			framebuffer[pixelOffset].g = backgroundPalette[colour].g;
 			framebuffer[pixelOffset].b = backgroundPalette[colour].b;
@@ -191,7 +191,7 @@ void renderScanline(void) {
 					else colour = tiles[sprite.tile][tileRow][x];
 					
 					if(colour) {
-						#if defined WIN || defined LIN || defined __APPLE__
+						#if defined WIN || defined LIN || defined __APPLE__ || defined VexV5
 							framebuffer[pixelOffset].r = pal[colour].r;
 							framebuffer[pixelOffset].g = pal[colour].g;
 							framebuffer[pixelOffset].b = pal[colour].b;
@@ -290,7 +290,7 @@ void drawFramebuffer(void) {
 
 #ifdef VexV5
 #include "robot.h"
-void drawFrameBuffer() {
+void drawFramebuffer() {
   for (int i = 0; i < (*(&framebuffer + 1) - framebuffer); i++) {
     auto px = framebuffer[i];
     char *clr;

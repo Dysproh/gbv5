@@ -91,7 +91,7 @@ void vblank(void) {
 		if(!aptMainLoop() || ((kHeld & KEY_START) && (kHeld & KEY_SELECT) && (kHeld & KEY_L) && (kHeld & KEY_R))) quit();
 	#endif
 	
-	#if defined LIN || defined __APPLE__
+	#if defined LIN || defined __APPLE__ || defined VexV5
 		drawFramebuffer();
 	#endif
 	
