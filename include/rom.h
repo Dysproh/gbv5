@@ -43,5 +43,5 @@ extern const char *romTypeString[256];
 unsigned char loadROM(char *filename);
 void unloadROM(void);
 #ifdef VexV5
-bool v5loadROM(char *filename);
+bool v5loadROM(const char *filename);
 #endif

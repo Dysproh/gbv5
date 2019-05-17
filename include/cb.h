@@ -1,7 +1,7 @@
 #pragma once
 
 struct extendedInstruction {
-	char *disassembly;
+	const char *disassembly;
 	void (*execute)(void);
 	//unsigned char ticks;
 } extern const extendedInstructions[256];

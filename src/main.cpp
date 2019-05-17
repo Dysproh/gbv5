@@ -20,43 +20,47 @@
 #include "display.h"
 
 void quit() {
-  exit(1);
+  while(true) {
+    std::cout<<"quitttttttttted"<<std::endl;
+    vex::task::sleep(20);
+  }
 }
 
 int main () {
-  Brain.Screen.render();
+  //Brain.Screen.render();
 
-  #ifndef NOFS
   if (!v5loadROM("tetris.gb")) {
     std::cout<<"v5loadROM failed"<<std::endl;
     quit();
   }
-  #else
-  std::cout<<"NOFS Not Implemented in VexV5 yet"<<std::endl;
-  #endif
 
-
+  std::cout<<"Entering main loop"<<std::endl;
   while(true) {
     keys.keys1 = 0xf;
     keys.keys2 = 0xf;
 
-
+    std::cout<<"Reading ab keys"<<std::endl;
     // Handle A and B
     if(Controller.ButtonA.pressing()) keys.a = 0;
     if(Controller.ButtonB.pressing()) keys.b = 0;
 
+    std::cout<<"Reading udlr keys"<<std::endl;
     //Handle Up, Down, Left, and Right
     if(Controller.ButtonLeft.pressing()) keys.left = 0;
     if(Controller.ButtonRight.pressing()) keys.right = 0;
     if(Controller.ButtonUp.pressing()) keys.up = 0;
     if(Controller.ButtonDown.pressing()) keys.down = 0;
 
+    std::cout<<"Reading ss keys"<<std::endl;
     //Handle Select and Start
     if(Controller.ButtonR1.pressing()) keys.select = 0;
     if(Controller.ButtonL1.pressing()) keys.start  = 0;
 
+    std::cout<<"Read Keys. Stepping CPU"<<std::endl;
     cpuStep();
+    std::cout<<"Stepping GPU"<<std::endl;
     gpuStep();
+    std::cout<<"Reading interrupts"<<std::endl;
     interruptStep();
   }
 
