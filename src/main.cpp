@@ -39,10 +39,12 @@ int main () {
     keys.keys1 = 0xf;
     keys.keys2 = 0xf;
 
+
+    std::cout<<"keys stored in memory at address "<<&keys<<std::endl;
     std::cout<<"Reading ab keys"<<std::endl;
     // Handle A and B
-    if(Controller.ButtonA.pressing()) keys.a = 0;
-    if(Controller.ButtonB.pressing()) keys.b = 0;
+    if(Controller.ButtonA.pressing() == true) {keys.a = 0;}
+    if(Controller.ButtonB.pressing() == true) {keys.b = 0;}
 
     std::cout<<"Reading udlr keys"<<std::endl;
     //Handle Up, Down, Left, and Right
